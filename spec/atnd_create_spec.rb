@@ -7,4 +7,10 @@ describe "atnd create" do
       lambda{ AtndCreate::Event.new("account", "password", {:login_type => "hoge"}) }.should raise_error(AtndCreate::AtndCreateException)
     end
   end
+
+  context 'login type is correct' do
+    it "raise not error" do
+      lambda{ AtndCreate::Event.new("account", "password", {:login_type => "hoge"}) }.should_not raise_error
+    end
+  end
 end
