@@ -4,7 +4,7 @@ require "atnd_create/version"
 module AtndCreate
   class AtndCreateException < Exception; end
 
-  class Atnd
+  class Event
     attr_accessor :account_id, :password, :title, :sub_title, :body, :start, :end, :limit, :url, :place_name, :address, :login_method
     attr_reader :posted
 
@@ -13,7 +13,7 @@ module AtndCreate
 
     def initialize(account_id, password, option = {:login_type => :google})
       @login_method = "login_#{option[:login_type].to_s}"
-      raise AtndCreateException, "#{option[:login_type]}でのloginには対応していません。" unless Atnd.method_defined?(@login_method)
+      raise AtndCreate::AtndCreateException, "#{option[:login_type]}でのloginには対応していません。" unless Event.method_defined?(@login_method)
 
       @account_id = account_id
       @password = password
